@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 96px; }
+  body { @apply bg-paper font-sans text-ink antialiased; font-feature-settings: "ss01", "cv11"; }
+  ::selection { @apply bg-pool text-white; }
+  :focus-visible { outline: 2px solid #1E6E92; outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  /* Faint architectural grid used behind page heroes */
+  .grid-bg {
+    background-color: #F7F7F4;
+    background-image:
+      radial-gradient(60% 70% at 15% 0%, rgba(15, 76, 104, 0.07), transparent 70%),
+      linear-gradient(to right, rgba(17, 19, 21, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17, 19, 21, 0.045) 1px, transparent 1px);
+    background-size: auto, 88px 88px, 88px 88px;
+  }
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group\/link:hover .link-underline, .group:hover .link-underline { background-size: 100% 1px; }
+
+  .card { @apply rounded-card border border-line bg-white transition-all duration-300 ease-soft; }
+  .card-hover { @apply hover:-translate-y-1 hover:border-stone hover:shadow-lift; }
+  .img-zoom { @apply transition-transform duration-500 ease-soft; }
+  .group:hover .img-zoom { transform: scale(1.03); }
+
+  .section { @apply py-20 sm:py-24 lg:py-32; }
+  .prose-body p { @apply mb-5 text-[17px] leading-[1.8] text-ink-muted; }
+  .prose-body h2 { @apply mb-4 mt-12 text-2xl font-bold tracking-tight text-ink; }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 340ms cubic-bezier(0.22,1,0.36,1), transform 340ms cubic-bezier(0.22,1,0.36,1); }
+  .reveal.is-shown { opacity: 1; transform: none; }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
